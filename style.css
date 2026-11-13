@@ -581,6 +581,86 @@ body {
     .nav-links.active {
         display: flex;
     }
+    /* StudyFlow Authentication Pages */
+
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 20px;
+    background: linear-gradient(135deg, #eef2ff, #f8faff);
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 430px;
+    padding: 40px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.08);
+}
+
+.auth-card h1 {
+    font-size: 30px;
+    margin-bottom: 25px;
+}
+
+.auth-card h1 span {
+    color: #6366f1;
+}
+
+.auth-card h2 {
+    font-size: 28px;
+    margin: 12px 0;
+}
+
+.auth-card form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 25px 0;
+}
+
+.auth-card label {
+    font-weight: 600;
+}
+
+.auth-card input {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #dce1eb;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+.auth-card input:focus {
+    outline: 2px solid #6366f1;
+    border-color: transparent;
+}
+
+.auth-card button {
+    width: 100%;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.auth-card p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.auth-card a {
+    color: #6366f1;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 28px 22px;
+    }
+}
 
     .nav-links a {
         color: white;
