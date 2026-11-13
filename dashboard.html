@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard | StudyFlow</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .dashboard {
+            min-height: 100vh;
+            padding: 35px 7%;
+            background: #f5f7ff;
+            color: #20243a;
+        }
+        .dash-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+        .dash-header h1 span { color: #6366f1; }
+        .dash-header a {
+            color: #6366f1;
+            text-decoration: none;
+        }
+        .welcome { margin-bottom: 30px; }
+        .welcome h2 { font-size: 30px; margin-bottom: 8px; }
+        .dash-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 20px;
+            margin: 25px 0 35px;
+        }
+        .dash-card, .dash-panel {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0,0,0,.05);
+        }
+        .dash-card h3 { font-size: 15px; color: #777; }
+        .dash-card strong { display: block; font-size: 30px; margin-top: 12px; }
+        .dash-panel { margin-bottom: 25px; }
+        .dash-panel h2 { margin-bottom: 18px; }
+        .task {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .task input { width: 18px; height: 18px; }
+        .focus-time {
+            font-size: 42px;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        .dash-btn {
+            border: 0;
+            padding: 12px 20px;
+            border-radius: 9px;
+            background: #6366f1;
+            color: white;
+            cursor: pointer;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <main class="dashboard">
+        <header class="dash-header">
+            <h1>Study<span>Flow.</span></h1>
+            <a href="index.html">← Back to Home</a>
+        </header>
+
+        <section class="welcome">
+            <h2>Welcome to your Dashboard! 👋</h2>
+            <p>Plan your day. Stay focused. Achieve more.</p>
+        </section>
+
+        <section class="dash-grid">
+            <div class="dash-card">
+                <h3>📚 Study Hours</h3>
+                <strong>2.5 hrs</strong>
+            </div>
+            <div class="dash-card">
+                <h3>✅ Tasks Completed</h3>
+                <strong id="completed">0</strong>
+            </div>
+            <div class="dash-card">
+                <h3>🎯 Daily Goal</h3>
+                <strong>75%</strong>
+            </div>
+        </section>
+
+        <section class="dash-panel">
+            <h2>Today's Study Tasks</h2>
+            <label class="task"><input type="checkbox"> Mathematics practice</label>
+            <label class="task"><input type="checkbox"> Science revision</label>
+            <label class="task"><input type="checkbox"> English reading</label>
+            <label class="task"><input type="checkbox"> Complete homework</label>
+        </section>
+
+        <section class="dash-panel">
+            <h2>⏱️ Focus Timer</h2>
+            <p>Take one task at a time.</p>
+            <div class="focus-time" id="timer">25:00</div>
+            <button class="dash-btn" id="start">Start</button>
+            <button class="dash-btn" id="reset">Reset</button>
+        </section>
+    </main>
+
+    <script>
+        const tasks = document.querySelectorAll('.task input');
+        const completed = document.getElementById('completed');
+
+        tasks.forEach(task => {
+            task.addEventListener('change', () => {
+                completed.textContent =
+                    document.querySelectorAll('.task input:checked').length;
+            });
+        });
+
+        let seconds = 25 * 60;
+        let interval = null;
+
+        const timer = document.getElementById('timer');
+
+        function showTime() {
+            const min = Math.floor(seconds / 60);
+            const sec = seconds % 60;
+            timer.textContent =
+                String(min).padStart(2, '0') + ':' +
+                String(sec).padStart(2, '0');
+        }
+
+        document.getElementById('start').onclick = () => {
+            if (interval) return;
+            interval = setInterval(() => {
+                if (seconds > 0) {
+                    seconds--;
+                    showTime();
+                } else {
+                    clearInterval(interval);
+                    interval = null;
+                    alert('Focus session complete!');
+                }
+            }, 1000);
+        };
+
+        document.getElementById('reset').onclick = () => {
+            clearInterval(interval);
+            interval = null;
+            seconds = 25 * 60;
+            showTime();
+        };
+    </script>
+</body>
+</html>
